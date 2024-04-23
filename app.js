@@ -19,7 +19,7 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const funcoes = require('./controller/funcoes.js')
+const funcoes = require('./controller/controller_funcoes')
 
 const app = express()
 

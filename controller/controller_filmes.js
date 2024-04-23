@@ -21,6 +21,9 @@ const setInserirNovoFilme = async function (dadosFilme, contentType) {
 
         if (String(contentType).toLowerCase() == 'application/json') {
 
+            let statusValidate = false
+            let novoFilmeJson = {}
+
             if (dadosFilme.nome == '' || dadosFilme.nome == undefined || dadosFilme.nome.length > 80 ||
                 dadosFilme.sinopse == '' || dadosFilme.sinopse == undefined || dadosFilme.sinopse.length > 65535 ||
                 dadosFilme.duracao == '' || dadosFilme.duracao == undefined || dadosFilme.duracao.length > 8 ||
@@ -97,7 +100,7 @@ const getListarfilmes = async function () {
 
     let filmesJSON = {};
 
-    let dadosFilmes = await fimesDAO.selectAllFilmes();
+    let dadosFilmes = await filmesDAO.selectAllFilmes();
 
     //validação para criar o JSON dos dados 
     if (dadosFilmes) {
