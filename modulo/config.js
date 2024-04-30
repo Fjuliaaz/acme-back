@@ -20,6 +20,8 @@ const ERROR_INTERNAL_SERVER = { status: false, status_code: 500, message: 'Ocorr
 
 const SUCCESS_CREATED_ITEM = { status: true, status_code: 201, message: 'O item foi criado com sucesso no banco de dados' }
 
+const SUCCESS_DELETED_ITEM = { status: true, status_code: 201, message: 'O item foi deletado com sucesso no banco de dados' }
+
 
 module.exports = {
     ERROR_INVALID_ID,
@@ -27,5 +29,6 @@ module.exports = {
     ERROR_INTERNAL_SERVER_DB,
     ERROR_REQUIRED_FIELDS,
     ERROR_CONTENT_TYPE,
-    ERROR_INTERNAL_SERVER
+    ERROR_INTERNAL_SERVER,
+    SUCCESS_DELETED_ITEM
 }
