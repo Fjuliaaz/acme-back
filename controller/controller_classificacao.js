@@ -56,16 +56,16 @@ const setAtualizarClassificacao = async (dadosClassificacao, contentType, id) =>
 
                 if (classificacaoAtualizada) {
                     let updatedClassificacao = await classificacoesDAO.selectByIdClassificacao(id) // Recupera a classificação atualizada do banco de dados
-                    let updatedId = updatedClassificacao[0].id // Extrai o id da classificação atualizada
+                    let updatedId = updatedClassificacao[0].id // chama o id da classificação atualizada
 
                     // Constrói o JSON de resposta com o id atualizado
                     updateClassificacaoJSON.status = message.SUCESS_UPDATE_ITEM.status
                     updateClassificacaoJSON.status_code = message.SUCESS_UPDATE_ITEM.status_code
                     updateClassificacaoJSON.message = message.SUCESS_UPDATE_ITEM.message
-                    updateClassificacaoJSON.id = updatedId // Usa o id atualizado aqui
+                    updateClassificacaoJSON.id = updatedId // Usa o id atualizado 
                     updateClassificacaoJSON.nome = dadosClassificacao
 
-                    return updateClassificacaoJSON // Retorna a resposta JSON atualizada
+                    return updateClassificacaoJSON // resposta JSON atualizada
                 } else {
                     return message.ERROR_INTERNAL_SERVER_DB // 500
                 }

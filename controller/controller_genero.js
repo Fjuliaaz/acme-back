@@ -22,10 +22,10 @@ const setInserirNovoGenero = async (dadosGenero, contentType) => {
                     let id = await generosDAO.selectId()
 
                     //JSON de retorno com informações de requisição e dados novos
-                    novoGeneroJSON.status = message.SUCESS_CREATED_ITEM.status
-                    novoGeneroJSON.status_code = message.SUCESS_CREATED_ITEM.status_code
-                    novoGeneroJSON.message = message.SUCESS_CREATED_ITEM.message
-                    novoGeneroJSON.id = parseInt(id)
+                    novoGeneroJSON.status = message.SUCESS_UPDATE_ITEM.status
+                    novoGeneroJSON.status_code = message.SUCCESS_DELETED_ITEM.status_code
+                    novoGeneroJSON.message = message.SUCESS_UPDATE_ITEM.message
+                    // novoGeneroJSON.id = parseInt(id)
                     novoGeneroJSON.nome = dadosGenero
 
                     return novoGeneroJSON //201
@@ -39,6 +39,7 @@ const setInserirNovoGenero = async (dadosGenero, contentType) => {
         }
 
     } catch (error) {
+        console.log(error)
         return message.ERROR_INTERNAL_SERVER 
     }
 }
@@ -92,15 +93,13 @@ const setExcluirGenero = async (id) => {
 
         if (idGenero == '' || idGenero == undefined || isNaN(idGenero)) {
 
-            return message.ERROR_INVALID_ID //400
-
         } else if (validaGenero.status == false) {
             return message.ERROR_NOT_FOUND
 
         } else {
 
             if (dadosGenero)
-                return message.SUCESS_DELETE_ITEM // 200
+                return message.SUCCESS_DELETE_ITEM // 200
             else
                 return message.ERROR_INTERNAL_SERVER_DB
 

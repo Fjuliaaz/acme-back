@@ -22,11 +22,12 @@ const setInserirAtor = async function(dadosAtor, contentType){
                 if(dadosAtor.nome==''          ||dadosAtor.nome==undefined          ||dadosAtor.nome==null               ||dadosAtor.nome.length>100            ||
                 dadosAtor.nome_artistico==''   || dadosAtor.nome_artistico==undefined  || dadosAtor.nome_artistico==null       || dadosAtor.nome_artistico.length>100 ||
                 dadosAtor.data_nascimento==''  ||dadosAtor.data_nascimento==undefined  ||dadosAtor.data_nascimento==null       ||dadosAtor.data_nascimento.length!=10 ||
-                dadosAtor.biografia==''        ||dadosAtor.biografia==undefined        ||dadosAtor.biografia==null             ||dadosAtor.biografia.length>65000     ||
-                dadosAtor.foto==''             ||dadosAtor.foto==undefined             ||dadosAtor.foto==null                  ||dadosAtor.foto.length>150            ||
+                dadosAtor.biografia==''        ||dadosAtor.biografia==undefined        ||dadosAtor.biografia==null             ||dadosAtor.biografia.length>150     ||
+                dadosAtor.foto==''             ||dadosAtor.foto==undefined             ||dadosAtor.foto==null                  ||dadosAtor.foto.length>65000            ||
                 dadosAtor.id_sexo==''          ||dadosAtor.id_sexo==undefined          ||dadosAtor.id_sexo==null               ||isNaN(dadosAtor.id_sexo)    
                 
                 ){
+                    console.log("dlsv")
                     return message.ERROR_REQUIRED_FIELDS//400
             
                 }
@@ -80,6 +81,7 @@ const setInserirAtor = async function(dadosAtor, contentType){
             
                 }
             }else{
+                console.log(error)
                 return message.ERROR_CONTENT_TYPE //415
             }
     }catch(error){
@@ -183,6 +185,7 @@ const setExcluirAtor = async function(id){
         let idAtor = id
     
         if(idAtor == '' || idAtor == undefined || idAtor == isNaN(idAtor) || idAtor == null){
+            console.log(error)
             return message.ERROR_INVALID_ID
         }else{
             let dadosAtor = await atorDAO.deleteAtor(idAtor)

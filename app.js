@@ -31,7 +31,7 @@ app.use((request, response, next) => {
     next();
 })
 
-//cria um objeto para definir o tipo de dados que ira chegar no body (json)
+//objeto para definir o tipo de dados que chega no body (json)
 const bodyParserJSON = bodyParser.json();
 
 /**
@@ -46,8 +46,6 @@ const bodyParserJSON = bodyParser.json();
   const controllerDiretor = require ('./controller/controller_diretor.js')
 /*******************************************************************/
 
-// EndPoint: Versão 1.0 que retorna os dados de um arquivo de filmes.
-// Periodo de utilização 01/2024 até 02/2024
 app.get('/v1/acmeFilmes/filmes', cors(), async function(request, response, next){
     let listarFilmes = info.getListarFilmes()
 
@@ -158,7 +156,7 @@ app.get('/v1/acmeFilmes/filmes', cors(), async function(request, response, next)
 
 
         // -> Chama a função da controller para retornar todos os filmes
-        let dadosGenero = await controllerGenero.getListarGenero()
+        let dadosGenero = await controllerGenero.getListarGeneros()
 
         if(dadosGenero){
             response.json(dadosGenero);
@@ -229,10 +227,10 @@ app.get('/v1/acmeFilmes/filmes', cors(), async function(request, response, next)
     /************************************************** Classificação *****************************************/
     app.post('/v2/filmesAcme/classificacao', cors(), bodyParserJSON, async function (request, response,next ){
 
-        // recebe o ContentType com os tipos de dados encaminhados na requisição
+        // recebe ContentType com os dados encaminhados na requisição
         let contentType = request.headers['content-type'];
     
-        // vou receber o que chegar no corpo da requisição e guardar nessa variável local
+        // vai receber o que chegar no corpo da requisição e guardar nessa variável local
         let dadosBody = request.body;
         // encaminha os dados para a controller enviar para o DAO
         let resultDadosNovaClassificacao = await controllerClassificacao.setInserirNovoClassificacao(dadosBody, contentType)
@@ -403,10 +401,10 @@ app.get('/v1/acmeFilmes/filmes', cors(), async function(request, response, next)
 
     app.post('/v2/filmesAcme/atores', cors(), bodyParserJSON, async function (request, response,next ){
 
-        // recebe o ContentType com os tipos de dados encaminhados na requisição
+        // recebe o ContentType com os dados encaminhados na requisição
         let contentType = request.headers['content-type'];
     
-        // vou receber o que chegar no corpo da requisição e guardar nessa variável local
+        // receber o que chegar no corpo da requisição e guardar nessa variável local
         let dadosBody = request.body;
         // encaminha os dados para a controller enviar para o DAO
         let resultDadosNovoAtor = await controllerAtor.setInserirAtor(dadosBody, contentType)
@@ -467,7 +465,7 @@ app.get('/v1/acmeFilmes/filmes', cors(), async function(request, response, next)
 
     app.post('/v2/filmesAcme/diretores', cors(), bodyParserJSON, async function (request, response,next ){
 
-        // recebe o ContentType com os tipos de dados encaminhados na requisição
+        // recebe o ContentType com os dados encaminhados na requisição
         let contentType = request.headers['content-type'];
     
         // vou receber o que chegar no corpo da requisição e guardar nessa variável local
@@ -495,6 +493,6 @@ app.get('/v1/acmeFilmes/filmes', cors(), async function(request, response, next)
     
     })
 
-    app.listen('8080', function(){
+    app.listen('8070', function(){
         console.log('API funcionando!!')
     })

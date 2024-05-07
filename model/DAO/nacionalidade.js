@@ -123,6 +123,25 @@ const selectByNomeNacionalidade = async (nome) => {
     }
 }
 
+const selectNacionalidadeDiretor = async function(id){
+
+    try {
+        // Script sql para buscar o filme pelo id
+        const sql = `select tbl_diretor.nome_artistico, tbl_diretor.data_nascimento, tbl_diretor.biografia, tbl_diretor.foto, tbl_diretor.tbl_sexo_id, tbl_nacionalidade.nome
+        from tbl_diretor left join tbl_nacionalidade_diretor on tbl_diretor.id = tbl_nacionalidade_diretor.id_diretor 
+            left join tbl_nacionalidade on tbl_nacionalidade.id = tbl_nacionalidade_diretor.id_nacionalidade where tbl_diretor.id = ${id};
+      `
+    
+        // envia script sql para o banco de dados
+        let rsFilme = await prisma.$queryRawUnsafe(sql)
+    
+        return rsFilme
+    } catch (error) {
+        return false
+    }
+
+}
+
 module.exports = {
     insertNacionalidade,
     selectId,
@@ -130,5 +149,6 @@ module.exports = {
     deleteNacionalidade,
     selectAllNacionalidades,
     selectByIdNacionalidade,
-    selectByNomeNacionalidade
+    selectByNomeNacionalidade,
+    selectNacionalidadeDiretor
 }

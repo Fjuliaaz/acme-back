@@ -10,55 +10,56 @@ const insertDiretor = async function(dadosDiretor){
     let sql
 
      try {
-        if(dadosDiretor.data_falecimento != '' &&
-         dadosDiretor.data_falecimento   != null &&
-         dadosDiretor.data_falecimento  != undefined){
-             sql = `insert into tbl_diretor (nome, 
-                                            data_nascimento,
-                                            data_falecimento,
-                                            biografia,
-                                            foto,
-                                            id_sexo        
+        if(
+        dadosDiretor.data_falecimento == '' ||
+         dadosDiretor.data_falecimento   == null ||
+         dadosDiretor.data_falecimento  == undefined){
+            sql = `insert into tbl_diretor (
+                nome, 
+                nome_artistico,
+                data_nascimento,
+                foto,
+                biografia,
+                tbl_sexo_id        
                 )values(
-                                           '${dadosDiretor.nome}',
-                                           '${dadosDiretor.data_nascimento}',
-                                           '${dadosDiretor.data_falecimento}',
-                                           '${dadosDiretor.biografia}',
-                                           '${dadosDiretor.foto}',
-                                           '${dadosDiretor.id_sexo}'
-
-                                           
-                )`;
+               '${dadosDiretor.nome}',
+               '${dadosDiretor.nome_artistico}',
+               '${dadosDiretor.data_nascimento}',
+               '${dadosDiretor.foto}',
+               '${dadosDiretor.biografia}',
+               '${dadosDiretor.tbl_sexo_id}'                                    
+                );`
 
         }else{
             
-            sql = `insert into tbl_diretor (nome, 
+            sql = `insert into tbl_diretor (
+                nome, 
+                nome_artistico,
                 data_nascimento,
                 data_falecimento,
-                biografia,
                 foto,
-                id_sexo
-)values(
+                biografia,
+                tbl_sexo_id
+                )values(
                '${dadosDiretor.nome}',
+               '${dadosDiretor.nome_artistico}',
                '${dadosDiretor.data_nascimento}',
-               null,
-               '${dadosDiretor.biografia}',
+               '${dadosDiretor.data_falecimento}',
                '${dadosDiretor.foto}',
-               '${dadosDiretor.id_sexo}'
-)`;
+               '${dadosDiretor.biografia}',
+               '${dadosDiretor.tbl_sexo_id}'
+                );`
         }
 
              //$executeRawUnsafe() -> serve para executar scripts sem retorno de dados 
                // (insert, update e delete)
             //$queryRawUnsafe() -> serve para executar scripts com retorno de dados (select)
 
-            console.log(sql)
             let result = await prisma.$executeRawUnsafe(sql)
-    
-            return !!result
+            
+            return result
         
      } catch (error) {
-        
         return false
      }
 }
